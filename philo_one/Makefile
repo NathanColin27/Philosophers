@@ -6,7 +6,7 @@
 #    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/03/22 14:35:04 by ncolin           ###   ########.fr        #
+#    Updated: 2021/03/23 15:44:10 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = philo_one
 
 SRC_PATH = srcs
 
-SRC_NAME =	minishell.c						\
-
+SRC_NAME =	philo_one.c		\
+			utils.c			\
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -I include
+CFLAGS = -Wall -Wextra -Werror -g -I include -pthread
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:%.c=%.o)
@@ -29,10 +29,10 @@ TRASH = \360\237\227\221
 default:
 	@make -s all
 
-all: libft $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC)$^ -o $@
+	@$(CC) $^ -o $@
 	@echo "\033[32;1m\r philo_one compiled ${TICK}          \033[0m"
 
 .SILENT:clean
