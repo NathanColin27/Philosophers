@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 10:12:51 by ncolin            #+#    #+#             */
-/*   Updated: 2021/03/23 12:39:13 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/03 09:32:55 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include <stdlib.h>
 
 void *dice(void *arg)
-{	
-
+{
 	int value = (rand() % 100) + 1;
 	int index = *(int*)arg;
 	int *res = malloc((sizeof(int)));

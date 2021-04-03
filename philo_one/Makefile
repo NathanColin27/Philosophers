@@ -3,28 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
+#    By: nathan <nathan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/03/23 15:44:10 by ncolin           ###   ########.fr        #
+#    Updated: 2021/04/03 10:01:01 by nathan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_one
 
+OS = $(shell uname -s)
+ifeq ($(OS), Linux)
+	TICK = \342\234\224
+	RE = \342\231\272
+	TRASH = \360\237\227\221
+	
+else
+	TICK = \xE2\x9C\x94
+	RE = \xE2\x99\xBA
+	TRASH = \xF0\x9F\x97\x91
+endif
+
 SRC_PATH = srcs
 
 SRC_NAME =	philo_one.c		\
 			utils.c			\
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -I include -pthread
+			memory.c		\
+			input.c			\
+			
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g -I include -pthread 
+# -fsanitize=address -fno-omit-frame-pointer
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:%.c=%.o)
-
-TICK = \342\234\224
-RE = \342\231\272
-TRASH = \360\237\227\221
 
 default:
 	@make -s all
