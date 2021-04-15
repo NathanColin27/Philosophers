@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/03 10:52:03 by nathan           ###   ########.fr       */
+/*   Updated: 2021/04/15 15:17:29 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <stdio.h>
 # include "pthread.h"
 
-# define ERR_ARGNUM 1
-# define ERR_ARGNOTSET 2
-# define ERR_ALLOC 3
+# define EATING 1
+# define SLEEPING 2
+# define THINKING 3
+# define DEAD 4
 
 typedef struct s_list
 {
@@ -29,34 +30,36 @@ typedef struct s_list
 
 typedef struct s_philo
 {
-	int	id;
-	int state;
-	int alive;
+	int			id;
+	int			state;
+	int			alive;
 	pthread_t	thread;
 }				t_philo;
 
 typedef struct s_fork
 {
-	int	id;
+	int				id;
+	pthread_mutex_t	lock;
 }				t_fork;
 
 typedef struct s_env
 {
-	int		number_of_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		number_of_times_each_philo_must_eat;
-	t_philo	*philos;
-	t_fork	*forks;
-	t_list	*ptrs_to_free;
+	int				number_of_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_meals;
+	pthread_mutex_t	mutex;
+	t_philo			*philos;
+	t_fork			*forks;
+	t_list			*ptrs_to_free;
 }				t_env;
 
 /*
 **	input
 */
 
-void	parse_input(int ac, char **av);
+void			parse_input(int ac, char **av);
 
 /*
 **	memory
@@ -80,6 +83,10 @@ t_env			*get_env(void);
 
 void			init_env(t_env *env);
 
+void			init_philo(void);
+
+void			init_forks(void);
+
 /*
 **	utils
 */
@@ -87,5 +94,9 @@ void			init_env(t_env *env);
 int				ft_atoi(const char *str);
 
 t_list			*ft_lstnew(void *content);
+
+int				get_microsec(void);
+
+void			print_env(void);
 
 #endif

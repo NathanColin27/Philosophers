@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/03 10:38:29 by nathan           ###   ########.fr       */
+/*   Updated: 2021/04/15 15:24:05 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	ft_free_list(void)
 {
 	t_env		*env;
 	t_list		*tmp;
-	
+
 	env = get_env();
 	tmp = env->ptrs_to_free;
 	while (env->ptrs_to_free != NULL)
 	{
-		tmp = env->ptrs_to_free;;
+		tmp = env->ptrs_to_free;
 		env->ptrs_to_free = env->ptrs_to_free->next;
-		if(tmp->content)
+		if (tmp->content)
 			free(tmp->content);
 		free(tmp);
 	}

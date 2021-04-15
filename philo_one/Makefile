@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nathan <nathan@student.42.fr>              +#+  +:+       +#+         #
+#    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/04/03 10:01:01 by nathan           ###   ########.fr        #
+#    Updated: 2021/04/15 15:06:00 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ ifeq ($(OS), Linux)
 	TICK = \342\234\224
 	RE = \342\231\272
 	TRASH = \360\237\227\221
-	
 else
 	TICK = \xE2\x9C\x94
 	RE = \xE2\x99\xBA
@@ -30,10 +29,10 @@ SRC_NAME =	philo_one.c		\
 			utils.c			\
 			memory.c		\
 			input.c			\
+			init.c			\
 			
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I include -pthread 
-# -fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -Wall -Wextra -Werror -g -I include -pthread
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:%.c=%.o)
@@ -45,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $^ -o $@
-	@echo "\033[32;1m\r philo_one compiled ${TICK}          \033[0m"
+	@echo "\033[32;1m\rPhilo_one compiled ${TICK}          \033[0m"
 
 .SILENT:clean
 

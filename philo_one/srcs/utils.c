@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/03 10:15:06 by nathan           ###   ########.fr       */
+/*   Updated: 2021/04/15 15:21:33 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-#define MAXLONG 9223372036854775807
+#include <sys/time.h>
 
 static int	ft_isspace(int c)
 {
@@ -44,20 +44,10 @@ int	ft_atoi(const char *str)
 			total = total * 10 + (*str - '0');
 			str++;
 		}
-		else if (sign == 1)
-			return ((int) MAXLONG);
-		else
-			return ((int)(-MAXLONG - 1));
 	}
 	total_int = total;
 	return (total_int * sign);
 }
-
-/*
-**	Allocates (with malloc(3)) and returns a new element. The variable content
-**  is initialized with the value of the parameter content. The variable
-**  next is initialized to NULL.
-*/
 
 t_list	*ft_lstnew(void *content)
 {
@@ -71,3 +61,24 @@ t_list	*ft_lstnew(void *content)
 	return (elem);
 }
 
+int	get_microsec(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000000 + time.tv_usec);
+}
+
+void	print_env(void)
+{
+	t_env	*env;
+
+	env = get_env();
+	printf("_________ENV_________\n");
+	printf("num_of_philo 	:  %d\n", env->number_of_philo);
+	printf("time_to_die  	:  %d\n", env->time_to_die);
+	printf("time_to_eat  	:  %d\n", env->time_to_eat);
+	printf("time_to_sleep	:  %d\n", env->time_to_sleep);
+	printf("num_of_meals	:  %d\n", env->number_of_meals);
+	printf("_____________________\n");
+}
