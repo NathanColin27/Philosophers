@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/15 15:17:29 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:20:43 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_env
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_meals;
+	int				dinner_start;
 	pthread_mutex_t	mutex;
 	t_philo			*philos;
 	t_fork			*forks;

@@ -6,11 +6,12 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/15 15:25:17 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:37:14 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+#include <unistd.h>
 
 void	error_exit(char *msg)
 {
@@ -26,6 +27,45 @@ t_env	*get_env(void)
 	return (&env);
 }
 
+void philo_state(t_philo *philo, char* state)
+{
+	t_env	*env;
+	int		time;
+
+	env = get_env();
+	time =  get_microsec();
+	printf("|%d ms| Philo Number %d is %s", (time - env->dinner_start) / 1000, philo->id + 1, state);
+}
+
+void philo_sleep(t_philo *philo)
+{
+	int start;	
+	t_env	*env;
+
+	env = get_env();
+	pthread_mutex_lock(&env->mutex);
+	start = get_microsec();
+	philo_state(philo, "sleeping\n");
+	usleep(get_env()->time_to_sleep * 1000);
+}
+
+void think(void)
+{
+	return ;
+}
+
+void philo_eat(t_philo *philo)
+{
+	t_env	*env;
+
+	env = get_env();
+	philo_state(philo, "eating\n");
+	usleep(env->time_to_eat * 1000);
+	pthread_mutex_unlock(&env->mutex);
+	
+	return ;
+}
+
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
@@ -35,10 +75,8 @@ void	*routine(void *ptr)
 	start = get_microsec();
 	env = get_env();
 	philo = (t_philo *)ptr;
-	pthread_mutex_lock(&env->mutex);
-	printf("Here is philo number %d\n", philo->id);
-	printf("%d microsec elapsed \n", get_microsec() - start);
-	pthread_mutex_unlock(&env->mutex);
+	philo_sleep(philo);
+	philo_eat(philo);
 	return (ptr);
 }
 
@@ -49,6 +87,7 @@ void	start_dinner(void)
 
 	env = get_env();
 	i = 0;
+	env->dinner_start = get_microsec();
 	while (i < env->number_of_philo)
 	{
 		if (pthread_create(&env->philos[i].thread, NULL, \
@@ -71,6 +110,7 @@ void	end_dinner(void)
 		i++;
 	}
 }
+
 
 int	main(int ac, char **av)
 {
