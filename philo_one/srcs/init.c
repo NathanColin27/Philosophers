@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:04:29 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/15 15:18:05 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:29:39 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	init_philo(void)
 		env->philos[i].alive = 1;
 		env->philos[i].id = i;
 		env->philos[i].state = THINKING;
+		env->philos[i].fork_left = &env->forks[i].lock;
+		env->philos[i].fork_right = &env->forks[(i+1)%env->number_of_philo].lock;
 		i++;
 	}
 }

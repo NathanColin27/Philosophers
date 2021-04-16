@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/15 16:20:43 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:29:21 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "pthread.h"
+#include <unistd.h>
 
 # define EATING 1
 # define SLEEPING 2
@@ -34,6 +35,8 @@ typedef struct s_philo
 	int			state;
 	int			alive;
 	pthread_t	thread;
+	pthread_mutex_t *fork_left;
+	pthread_mutex_t *fork_right;
 }				t_philo;
 
 typedef struct s_fork
@@ -99,5 +102,19 @@ t_list			*ft_lstnew(void *content);
 int				get_microsec(void);
 
 void			print_env(void);
+
+/*
+**	actions
+*/
+
+void			philo_sleep(t_philo *philo);
+
+void			philo_eat(t_philo *philo);
+
+void			philo_think(t_philo *philo);
+
+void			philo_grab_fork(t_philo *philo);
+
+void			philo_state(t_philo *philo, char* state);
 
 #endif

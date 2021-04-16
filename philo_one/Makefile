@@ -6,7 +6,7 @@
 #    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/04/15 15:06:00 by ncolin           ###   ########.fr        #
+#    Updated: 2021/04/16 14:23:41 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME =	philo_one.c		\
 			memory.c		\
 			input.c			\
 			init.c			\
+			actions.c		\
 			
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I include -pthread

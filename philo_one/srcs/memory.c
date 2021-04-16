@@ -6,16 +6,12 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/15 15:24:05 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:31:27 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	free_all(void)
-{
-	return ;
-}
 
 /*
 ** Adds the element new at the end of the list.
@@ -79,4 +75,10 @@ void	ft_free_list(void)
 			free(tmp->content);
 		free(tmp);
 	}
+}
+
+void	free_all(void)
+{
+	ft_free_list();
+	return ;
 }
