@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:14:00 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/16 16:08:14 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/18 16:55:24 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ void philo_eat(t_philo *philo)
 	t_env	*env;
 
 	env = get_env();
+	philo->last_meal = get_microsec();
 	philo_state(philo, "eating\n");
 	usleep(env->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
+	philo_state(philo, "released forks\n");
+
 }
 
 void philo_state(t_philo *philo, char* state)
@@ -45,10 +48,10 @@ void philo_state(t_philo *philo, char* state)
 	int		time;
 
 	env = get_env();
-	pthread_mutex_lock(&env->mutex);
+	// pthread_mutex_lock(&env->mutex);
 	time =  get_microsec();
-	printf("|%d ms| Philo Number %d is %s", (time - env->dinner_start) / 1000, philo->id + 1, state);
-	pthread_mutex_unlock(&env->mutex);
+	printf("|%d ms| Philo Number %d %s", (time - env->dinner_start) / 1000, philo->id + 1, state);
+	// pthread_mutex_unlock(&env->mutex);
 }
 
 void philo_grab_fork(t_philo *philo)
@@ -57,11 +60,14 @@ void philo_grab_fork(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->fork_left);
 		pthread_mutex_lock(philo->fork_right);
+		philo_state(philo, "grabbed forks\n");
 	}
 	else
 	{
 		usleep(1000);
 		pthread_mutex_lock(philo->fork_left);
 		pthread_mutex_lock(philo->fork_right);
+		philo_state(philo, "grabbed forks\n");
+
 	}
 }

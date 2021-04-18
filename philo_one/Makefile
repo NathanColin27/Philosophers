@@ -6,7 +6,7 @@
 #    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/04/16 14:23:41 by ncolin           ###   ########.fr        #
+#    Updated: 2021/04/18 14:11:42 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ $(NAME): $(OBJ)
 .SILENT:clean
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ) philo_one.dSYM
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "\033[32;1m\rDirectory cleaned ${TRASH}          \033[0m"
 

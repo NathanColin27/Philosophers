@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/16 15:29:21 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/18 17:02:52 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_list
 typedef struct s_philo
 {
 	int			id;
+	int			last_meal;
 	int			state;
 	int			alive;
 	pthread_t	thread;
@@ -47,7 +48,9 @@ typedef struct s_fork
 
 typedef struct s_env
 {
+	// check death mutex;
 	int				number_of_philo;
+	int				number_of_philo_alive;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
