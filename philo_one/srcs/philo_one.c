@@ -6,12 +6,11 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/18 17:02:23 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 12:41:21 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-
 
 void	error_exit(char *msg)
 {
@@ -27,16 +26,14 @@ t_env	*get_env(void)
 	return (&env);
 }
 
-
-
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
 	t_env	*env;
 	env = get_env();
 	philo = (t_philo *)ptr;
-	
-	while (env->number_of_philo_alive == env->number_of_philo)
+
+	while (env->number_of_philo_alive == env->number_of_philo && !env->dinner_is_over)
 	{
 		philo_grab_fork(philo);
 		philo_eat(philo);
@@ -70,7 +67,7 @@ void	end_dinner(void)
 
 	env = get_env();
 	i = 0;
-	while (i <= env->number_of_philo)
+	while (i < env->number_of_philo)
 	{
 		pthread_join(env->philos[i].thread, NULL);
 		i++;
@@ -87,14 +84,13 @@ void check_philo_death(t_philo *philo)
 		env->number_of_philo_alive--;
 		philo_state(philo, "died\n");
 	}
-	
 }
 
 void check_deaths(t_env *env)
 {
 	int i;
 
-	while (env->number_of_philo_alive == env->number_of_philo)
+	while (env->number_of_philo_alive == env->number_of_philo && !env->dinner_is_over)
 	{
 		i = 0;
 		while ( i < env->number_of_philo)
@@ -104,7 +100,7 @@ void check_deaths(t_env *env)
 			pthread_mutex_unlock(&env->mutex);
 			i++;
 		}
-		usleep(1000);
+		ft_usleep(get_microsec(), env->time_to_die);
 	}
 }
 
@@ -118,7 +114,7 @@ int	main(int ac, char **av)
 	init_forks();
 	init_philo();
 	start_dinner();
-	usleep(10000);
+	usleep(env->time_to_die);
 	check_deaths(env);
 	end_dinner();
 	free_all();

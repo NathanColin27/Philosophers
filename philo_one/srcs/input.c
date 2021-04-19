@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 09:29:25 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/15 15:18:45 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 11:27:54 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	parse_input(int ac, char **av)
 	env->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		env->number_of_meals = ft_atoi(av[5]);
+	else
+		env->number_of_meals = -1;
 	check_args(ac, env);
 }

@@ -6,12 +6,11 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/16 14:31:27 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 11:19:51 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-
 
 /*
 ** Adds the element new at the end of the list.

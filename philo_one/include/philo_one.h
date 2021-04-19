@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/18 17:02:52 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 12:27:43 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ typedef struct s_list
 
 typedef struct s_philo
 {
-	int			id;
-	int			last_meal;
-	int			state;
-	int			alive;
-	pthread_t	thread;
+	int				id;
+	int				last_meal;
+	int				state;
+	int				alive;
+	int				meals_eaten;
+	pthread_t		thread;
 	pthread_mutex_t *fork_left;
 	pthread_mutex_t *fork_right;
 }				t_philo;
@@ -48,14 +49,15 @@ typedef struct s_fork
 
 typedef struct s_env
 {
-	// check death mutex;
 	int				number_of_philo;
 	int				number_of_philo_alive;
+	int				number_of_philo_full;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_meals;
 	int				dinner_start;
+	int				dinner_is_over;
 	pthread_mutex_t	mutex;
 	t_philo			*philos;
 	t_fork			*forks;
@@ -119,5 +121,7 @@ void			philo_think(t_philo *philo);
 void			philo_grab_fork(t_philo *philo);
 
 void			philo_state(t_philo *philo, char* state);
+
+void 			ft_usleep(int starting_time, int microsec);
 
 #endif

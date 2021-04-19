@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/15 15:21:33 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 11:11:17 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ t_list	*ft_lstnew(void *content)
 	elem->content = content;
 	elem->next = NULL;
 	return (elem);
+}
+
+void ft_usleep(int starting_time, int microsec)
+{
+	usleep(microsec * 0.8);
+	while (get_microsec() <= starting_time + microsec)
+	{
+		usleep(100);
+	}
 }
 
 int	get_microsec(void)
