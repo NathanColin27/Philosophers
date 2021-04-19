@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 09:29:25 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/19 11:27:54 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 16:55:28 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ void	check_args(int argc, t_env *env)
 	if (!env->number_of_philo || !env->time_to_die || !env->time_to_eat || \
 		!env->time_to_sleep)
 		error_exit("Args not correctly set");
+	if (env->number_of_philo < 2 || env->number_of_philo > 200)
+		error_exit("Parameter 'number_of_philosophers' requires an integer between 2 and 200.");
 	else if (argc == 6 && env->number_of_meals <= 0)
 		error_exit("Args not correctly set");
-	else if (env->number_of_philo * env->time_to_die * env->time_to_eat \
-			* env->time_to_sleep < 0 )
-		error_exit("Args can not be negatives");
 }
 
 void	parse_input(int ac, char **av)
@@ -38,6 +37,6 @@ void	parse_input(int ac, char **av)
 	if (ac == 6)
 		env->number_of_meals = ft_atoi(av[5]);
 	else
-		env->number_of_meals = -1;
+		env->number_of_meals = 0;
 	check_args(ac, env);
 }

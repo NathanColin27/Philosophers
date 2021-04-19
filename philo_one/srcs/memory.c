@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/19 11:19:51 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 16:47:53 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_free_list(void)
 
 void	free_all(void)
 {
+	// destroy mutexes
 	ft_free_list();
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 11:11:17 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/19 17:20:12 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void ft_usleep(int starting_time, int microsec)
 	usleep(microsec * 0.8);
 	while (get_microsec() <= starting_time + microsec)
 	{
-		usleep(100);
+		usleep(500);
 	}
 }
 
@@ -76,18 +76,4 @@ int	get_microsec(void)
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000 + time.tv_usec);
-}
-
-void	print_env(void)
-{
-	t_env	*env;
-
-	env = get_env();
-	printf("_________ENV_________\n");
-	printf("num_of_philo 	:  %d\n", env->number_of_philo);
-	printf("time_to_die  	:  %d\n", env->time_to_die);
-	printf("time_to_eat  	:  %d\n", env->time_to_eat);
-	printf("time_to_sleep	:  %d\n", env->time_to_sleep);
-	printf("num_of_meals	:  %d\n", env->number_of_meals);
-	printf("_____________________\n");
 }
