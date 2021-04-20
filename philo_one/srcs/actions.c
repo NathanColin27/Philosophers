@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:14:00 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 17:29:07 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/20 15:02:11 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void philo_state(t_philo *philo, char* state)
 	if(!philo->alive || env->dinner_is_over)
 		return ;
 	pthread_mutex_lock(&env->mutex);
+	
 	// printf("[%d]	%d %s", (get_microsec() - env->dinner_start) / 1000, philo->id + 1, state);
 	// write(1, state, 30);
 	pthread_mutex_unlock(&env->mutex);

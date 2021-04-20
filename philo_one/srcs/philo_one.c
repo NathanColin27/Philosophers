@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 17:31:58 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/20 15:01:04 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void check_philo_death(t_philo *philo)
 	{
 		pthread_mutex_unlock(&env->mutex);
 		philo_state(philo, "died\n");
-		write(1, "died\n", 6 );
+		write(1, "died\n", 6);
 		exit(0);
 		env->dinner_is_over = 1;
 		philo->alive = 0;

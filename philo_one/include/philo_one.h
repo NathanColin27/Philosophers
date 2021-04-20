@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 12:27:43 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/20 15:06:12 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ t_list			*ft_lstnew(void *content);
 int				get_microsec(void);
 
 void			print_env(void);
+
+void			ft_putstr_fd(char *str, int fd);
 
 /*
 **	actions
