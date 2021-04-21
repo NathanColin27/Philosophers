@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/20 15:06:12 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 17:14:21 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,18 @@
 # define EATING 1
 # define SLEEPING 2
 # define THINKING 3
-# define DEAD 4
+# define DEATH 4
+# define GRAB_FORK 5
+# define EAT_MSG " is eating\n"
+# define SLEEP_MSG " is sleeping\n"
+# define THINK_MSG " is thinking\n"
+# define DEATH_MSG " died\n"
+# define GRAB_FORK_MSG " has taken a fork\n"
+# define EAT_MSG_LEN 12
+# define SLEEP_MSG_LEN 14 
+# define THINK_MSG_LEN 14
+# define DEATH_MSG_LEN 7
+# define GRAB_FORK_MSG_LEN 19
 
 typedef struct s_list
 {
@@ -32,7 +43,7 @@ typedef struct s_list
 typedef struct s_philo
 {
 	int				id;
-	int				last_meal;
+	long				last_meal;
 	int				state;
 	int				alive;
 	int				meals_eaten;
@@ -56,7 +67,7 @@ typedef struct s_env
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_meals;
-	int				dinner_start;
+	long			dinner_start;
 	int				dinner_is_over;
 	pthread_mutex_t	mutex;
 	t_philo			*philos;
@@ -104,11 +115,15 @@ int				ft_atoi(const char *str);
 
 t_list			*ft_lstnew(void *content);
 
-int				get_microsec(void);
+long			get_microsec(void);
 
 void			print_env(void);
 
 void			ft_putstr_fd(char *str, int fd);
+
+void			ft_putnbr_fd(int n, int fd);
+
+int	ft_strlen(char const *str);
 
 /*
 **	actions
@@ -122,7 +137,7 @@ void			philo_think(t_philo *philo);
 
 void			philo_grab_fork(t_philo *philo);
 
-void			philo_state(t_philo *philo, char* state);
+void			philo_state(t_philo *philo, int state);
 
 void 			ft_usleep(int starting_time, int microsec);
 

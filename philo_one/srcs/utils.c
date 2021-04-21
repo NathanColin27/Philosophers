@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 17:20:12 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 17:13:23 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void ft_usleep(int starting_time, int microsec)
 	}
 }
 
-int	get_microsec(void)
+long	get_microsec(void)
 {
 	struct timeval	time;
 

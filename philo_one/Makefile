@@ -6,7 +6,7 @@
 #    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/04/20 15:06:40 by ncolin           ###   ########.fr        #
+#    Updated: 2021/04/21 11:03:56 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC_PATH = srcs
 
 SRC_NAME =	philo_one.c		\
 			utils.c			\
-			utils2.c			\
+			utils2.c		\
+			print.c			\
 			memory.c		\
 			input.c			\
 			init.c			\

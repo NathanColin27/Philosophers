@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/20 15:01:04 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 17:15:43 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	*routine(void *ptr)
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
-		write(1, "Test\n", 6);
 	}
 	return (ptr);
 }
@@ -77,40 +76,36 @@ void	end_dinner(void)
 	}
 }
 
-void check_philo_death(t_philo *philo)
+void check_philo_death(t_philo *philo, long time)
 {
 	t_env *env;
 
 	env = get_env();
 	if (env->dinner_is_over)
 		return ;
-	if (get_microsec() - philo->last_meal >= env->time_to_die * 1000)
+	if (time - philo->last_meal >= env->time_to_die * 1000)
 	{
-		pthread_mutex_unlock(&env->mutex);
-		philo_state(philo, "died\n");
-		write(1, "died\n", 6);
-		exit(0);
+		philo_state(philo, DEATH);
+		printf("time : %ld, last meal : %ld\n soustraction : %ld", time, philo->last_meal, time - philo->last_meal);
 		env->dinner_is_over = 1;
 		philo->alive = 0;
-		pthread_mutex_lock(&env->mutex);
 	}
 }
 
 void check_deaths(t_env *env)
 {
 	int i;
-
+	long time;
 	while (env->number_of_philo_alive == env->number_of_philo && !env->dinner_is_over)
 	{
 		i = 0;
+		usleep(1000);
+		time = get_microsec();
 		while ( i < env->number_of_philo)
 		{
-			pthread_mutex_lock(&env->mutex);
-			check_philo_death(&env->philos[i]);
-			pthread_mutex_unlock(&env->mutex);
+			check_philo_death(&env->philos[i], time);
 			i++;
 		}
-		ft_usleep(get_microsec(), 1000);
 	}
 }
 
