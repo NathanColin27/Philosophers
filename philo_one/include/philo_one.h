@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 17:14:21 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 18:07:02 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_env
 	int				number_of_philo;
 	int				number_of_philo_alive;
 	int				number_of_philo_full;
+	long			current_time;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -121,7 +122,7 @@ void			print_env(void);
 
 void			ft_putstr_fd(char *str, int fd);
 
-void			ft_putnbr_fd(int n, int fd);
+void			ft_putnbr_fd(long n, int fd);
 
 int	ft_strlen(char const *str);
 
@@ -135,7 +136,7 @@ void			philo_eat(t_philo *philo);
 
 void			philo_think(t_philo *philo);
 
-void			philo_grab_fork(t_philo *philo);
+void			philo_grab_fork(t_philo *philo, t_env *env);
 
 void			philo_state(t_philo *philo, int state);
 

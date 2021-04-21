@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 17:15:43 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 17:38:21 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	*routine(void *ptr)
 	{
 		if (env->number_of_meals && env->number_of_meals <= philo->meals_eaten)
 			break ;
-		philo_grab_fork(philo);
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
@@ -99,13 +98,13 @@ void check_deaths(t_env *env)
 	while (env->number_of_philo_alive == env->number_of_philo && !env->dinner_is_over)
 	{
 		i = 0;
-		usleep(1000);
 		time = get_microsec();
 		while ( i < env->number_of_philo)
 		{
 			check_philo_death(&env->philos[i], time);
 			i++;
 		}
+		usleep(500);
 	}
 }
 

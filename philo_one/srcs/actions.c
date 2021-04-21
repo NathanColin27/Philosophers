@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:14:00 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 16:59:11 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 18:05:33 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void philo_eat(t_philo *philo)
 	env = get_env();
 	if (!env->dinner_is_over)
 	{	
+		philo_grab_fork(philo, env);
+		env->current_time = get_microsec();
+		philo->last_meal = env->current_time;
 		philo_state(philo, EATING);
-		philo->last_meal = get_microsec();
 		ft_usleep(philo->last_meal ,env->time_to_eat * 1000);
 	}
 	if (env->number_of_meals > 0)
@@ -68,9 +70,10 @@ void philo_state(t_philo *philo, int state)
 	if(!philo->alive || env->dinner_is_over)
 		return ;
 	pthread_mutex_lock(&env->mutex);
-	// ft_putnbr_fd((get_microsec() - env->dinner_start) /1000, 1);
-	// write(1, " ", 1);
-	// ft_putnbr_fd(philo->id + 1, 1);
+	
+	ft_putnbr_fd(env->current_time, 1);
+	write(1, " ", 1);
+	ft_putnbr_fd(philo->id + 1, 1);
 	if (state == GRAB_FORK)
 		write(1, GRAB_FORK_MSG, GRAB_FORK_MSG_LEN);
 	else if (state == EATING)
@@ -92,11 +95,8 @@ void philo_state(t_philo *philo, int state)
 	
 }
 
-void philo_grab_fork(t_philo *philo)
+void philo_grab_fork(t_philo *philo, t_env *env)
 {
-	t_env *env;
-
-	env = get_env();
 	if (!env->dinner_is_over && philo->alive)
 	{	
 		if (philo->id % 2)

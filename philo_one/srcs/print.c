@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 10:56:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 12:42:18 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/21 18:06:45 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_putstr_fd(char *str, int fd)
 	write(fd, str, ft_strlen(str));
 }
 
-void reverse(char x[10], int begin, int end)
+void reverse(char x[19], long begin, long end)
 {
    char c;
 
@@ -45,9 +45,9 @@ void reverse(char x[10], int begin, int end)
    reverse(x, ++begin, --end);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(long n, int fd)
 {
-	char	str[10];
+	char	str[19];
 	int		length;
 
 	if (n == 0)
