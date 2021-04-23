@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 18:07:02 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 13:34:57 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,33 @@
 # define DEATH_MSG_LEN 7
 # define GRAB_FORK_MSG_LEN 19
 
+struct s_env;
+
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
 
+typedef struct s_fork
+{
+	int				last_philo;
+	pthread_mutex_t	lock;
+}				t_fork;
+
 typedef struct s_philo
 {
 	int				id;
-	long				last_meal;
+	long			last_meal;
 	int				state;
 	int				alive;
 	int				meals_eaten;
+	struct s_env 	*env;
 	pthread_t		thread;
-	pthread_mutex_t *fork_left;
-	pthread_mutex_t *fork_right;
+	t_fork			*fork_left;
+	t_fork			*fork_right;
 }				t_philo;
 
-typedef struct s_fork
-{
-	int				id;
-	pthread_mutex_t	lock;
-}				t_fork;
 
 typedef struct s_env
 {
@@ -132,14 +136,14 @@ int	ft_strlen(char const *str);
 
 void			philo_sleep(t_philo *philo);
 
-void			philo_eat(t_philo *philo);
+void			philo_eat(t_philo *philo, t_env *env);
 
 void			philo_think(t_philo *philo);
 
-void			philo_grab_fork(t_philo *philo, t_env *env);
+void			philo_grab_fork(t_philo *philo);
 
 void			philo_state(t_philo *philo, int state);
 
-void 			ft_usleep(int starting_time, int microsec);
+void 			ft_usleep(long end);
 
 #endif

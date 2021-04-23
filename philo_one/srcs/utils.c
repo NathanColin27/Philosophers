@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/21 17:55:02 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 13:52:13 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,13 @@ t_list	*ft_lstnew(void *content)
 	return (elem);
 }
 
-void ft_usleep(int starting_time, int microsec)
+void ft_usleep(long end_time)
 {
-	usleep(microsec * 0.95);
-	while (get_microsec() <= starting_time + microsec)
+	usleep((end_time - get_microsec()) * 0.99);
+	while (get_microsec() <= end_time)
 	{	
-		
-		usleep(500);
+		usleep(200);
 	}
-	printf("%ld\n",get_microsec()-starting_time);
 }
 
 long	get_microsec(void)
@@ -79,3 +77,4 @@ long	get_microsec(void)
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }
+

@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:04:29 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/19 14:20:08 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 13:30:17 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_forks(void)
 	i = 0;
 	while (i < env->number_of_philo)
 	{
-		env->forks[i].id = i;
+		env->forks[i].last_philo = -1;
 		if (pthread_mutex_init(&env->forks[i].lock, NULL))
 			error_exit("mutex init failed");
 		i++;
@@ -57,8 +57,9 @@ void	init_philo(void)
 		env->philos[i].last_meal = get_microsec();
 		env->philos[i].id = i;
 		env->philos[i].state = THINKING;
-		env->philos[i].fork_left = &env->forks[i].lock;
-		env->philos[i].fork_right = &env->forks[(i+1)%env->number_of_philo].lock;
+		env->philos[i].fork_left = &env->forks[i];
+		env->philos[i].fork_right = &env->forks[(i+1)%env->number_of_philo];
+		env->philos[i].env = env;
 		i++;
 	}
 }
