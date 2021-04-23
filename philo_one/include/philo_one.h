@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 13:34:57 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 15:06:54 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			parse_input(int ac, char **av);
 
 void			*malloc_to_list(size_t elem_size, size_t elem_number);
 void			*append_ptr_list(void *ptr);
-void			free_all(void);
+void			free_all(t_env	*env);
 
 /*
 **	errors
@@ -110,7 +110,7 @@ void			init_env(t_env *env);
 
 void			init_philo(void);
 
-void			init_forks(void);
+void			init_forks(t_env *env);
 
 /*
 **	utils

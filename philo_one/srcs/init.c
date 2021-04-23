@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:04:29 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 13:30:17 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 15:22:59 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ void	init_env(t_env *env)
 	env->dinner_is_over = 0;
 }
 
-void	init_forks(void)
+void	init_forks(t_env *env)
 {
-	t_env	*env;
 	int		i;
 
-	env = get_env();
 	i = 0;
 	while (i < env->number_of_philo)
 	{
-		env->forks[i].last_philo = -1;
+		env->forks[i].last_philo = i % 2;
 		if (pthread_mutex_init(&env->forks[i].lock, NULL))
 			error_exit("mutex init failed");
 		i++;

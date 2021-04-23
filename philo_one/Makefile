@@ -6,7 +6,7 @@
 #    By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:29:03 by ncolin            #+#    #+#              #
-#    Updated: 2021/04/21 11:03:56 by ncolin           ###   ########.fr        #
+#    Updated: 2021/04/23 14:56:04 by ncolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC_NAME =	philo_one.c		\
 			actions.c		\
 			
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I include -pthread
+CFLAGS = -Wall -Wextra -Werror -g -I include -pthread -O2
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:%.c=%.o)

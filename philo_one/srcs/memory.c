@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/21 11:33:44 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/23 15:06:44 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,10 @@ void	ft_free_list(void)
 	}
 }
 
-void	free_all(void)
+void	free_all(t_env	*env)
 {
-	t_env	*env;
 	int i;
 
-	env = get_env();
 	i = 0;
 	while (i < env->number_of_philo)
 		{
