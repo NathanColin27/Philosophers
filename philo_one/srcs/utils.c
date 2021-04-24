@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:42:46 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 13:52:13 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 16:51:42 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_list	*ft_lstnew(void *content)
 	return (elem);
 }
 
-void ft_usleep(long end_time)
+void	ft_usleep(long end_time)
 {
 	usleep((end_time - get_microsec()) * 0.99);
 	while (get_microsec() <= end_time)
@@ -77,4 +77,3 @@ long	get_microsec(void)
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }
-

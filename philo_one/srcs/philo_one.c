@@ -6,30 +6,17 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/24 16:15:39 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 17:29:38 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	error_exit(char *msg)
-{
-	printf("%s\n", msg);
-	
-	free_all(get_env());
-}
-
-t_env	*get_env(void)
-{
-	static t_env	env;
-
-	return (&env);
-}
-
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
 	t_env	*env;
+
 	env = get_env();
 	philo = (t_philo *)ptr;
 	while (!env->dinner_is_over)
@@ -40,6 +27,7 @@ void	*routine(void *ptr)
 		if (env->number_of_philo_full == env->number_of_philo)
 		{
 			env->dinner_is_over = 1;
+			return (ptr);
 		}
 	}
 	return (ptr);
@@ -85,19 +73,20 @@ void	end_dinner(t_env *env)
 	}
 }
 
-void check_deaths(t_env *env)
+void	check_deaths(t_env *env)
 {
-	int i;
-	long time;
+	int		i;
+	long	time;
+
 	while (!env->dinner_is_over)
 	{
 		i = 0;
 		time = get_microsec();
-		while ( i < env->number_of_philo && !env->dinner_is_over)
+		while (i < env->number_of_philo && !env->dinner_is_over)
 		{
 			if (time - env->philos[i].last_meal >= env->time_to_die * 1000)
 			{
-				philo_state(&env->philos[i], DEATH);
+				philo_state(&env->philos[i], env, DEATH);
 				return ;
 			}
 			i++;
@@ -111,13 +100,14 @@ int	main(int ac, char **av)
 	t_env	*env;
 
 	env = get_env();
-	parse_input(ac, av);
+	if (parse_input(ac, av))
+		return (1);
 	init_env(env);
 	init_forks(env);
 	init_philo();
 	start_dinner();
 	check_deaths(env);
 	end_dinner(env);
-	free_all(env);
+	ft_free_list();
 	return (0);
 }

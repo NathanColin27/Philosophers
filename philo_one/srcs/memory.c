@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/24 16:13:25 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 17:10:50 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,26 @@ void	ft_free_list(void)
 	}
 }
 
-void	free_all(t_env	*env)
-{
-	int i;
+// void	free_all(t_env	*env)
+// {
+// 	int	i;
 
-	i = 0;
-	usleep(500000);
-	while (i < env->number_of_philo)
-	{
-		pthread_mutex_unlock(&env->forks[i].lock);
-		pthread_mutex_destroy(&env->forks[i].lock);
-		i++;
-	}
+// 	i = 0;
+// 	(void)env;
+// 	usleep(500000);
+// 	// while (i < env->number_of_philo)
+// 	// {
+// 	// 	pthread_mutex_unlock(&env->forks[i].lock);
+// 	// 	pthread_mutex_destroy(&env->forks[i].lock);
+// 	// 	i++;
+// 	// }
+// 	ft_free_list();
+// 	return ;
+// }
+
+int	error_exit(char *msg)
+{
+	printf("%s\n", msg);
 	ft_free_list();
-	return ;
+	return (1);
 }

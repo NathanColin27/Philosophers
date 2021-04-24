@@ -6,11 +6,18 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:04:29 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/24 15:59:59 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 17:20:44 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+t_env	*get_env(void)
+{
+	static t_env	env;
+
+	return (&env);
+}
 
 void	init_env(t_env *env)
 {
@@ -54,7 +61,7 @@ void	init_philo(void)
 		env->philos[i].id = i;
 		env->philos[i].state = THINKING;
 		env->philos[i].fork_left = &env->forks[i];
-		env->philos[i].fork_right = &env->forks[(i+1)%env->number_of_philo];
+		env->philos[i].fork_right = &env->forks[(i + 1) % env->number_of_philo];
 		env->philos[i].env = env;
 		i++;
 	}
