@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:14:00 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 17:24:01 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 14:23:18 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void philo_eat(t_philo *philo, t_env *env)
 void philo_state(t_philo *philo, int state)
 {
 	t_env	*env;
-	int i;
+	long i;
 
-	i = -1;
+	i = get_microsec();
 	env = get_env();
 	if (env->dinner_is_over)
 		return ;
 	pthread_mutex_lock(&env->mutex);
-	ft_putnbr_fd((get_microsec() - env->dinner_start)/1000, 1);
+	ft_putnbr_fd((i - env->dinner_start)/1000, 1);
 	write(1, " ", 1);
 	ft_putnbr_fd(philo->id + 1, 1);
 	if (state == GRAB_FORK)
@@ -52,8 +52,9 @@ void philo_state(t_philo *philo, int state)
 	else if (state == DEATH)
 		write(1, DEATH_MSG, DEATH_MSG_LEN);
 	if (state == DEATH)
-	{
+	{	
 		env->dinner_is_over = 1;
+
 		return ;
 	}
 	pthread_mutex_unlock(&env->mutex);

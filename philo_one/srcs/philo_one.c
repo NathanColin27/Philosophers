@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 17:31:07 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 14:33:39 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	error_exit(char *msg)
 	printf("%s\n", msg);
 	
 	free_all(get_env());
-	exit(0);
 }
 
 t_env	*get_env(void)
@@ -36,8 +35,10 @@ void	*routine(void *ptr)
 	while (!env->dinner_is_over)
 	{
 		philo_eat(philo, env);
-		if (env->number_of_meals && env->number_of_meals <= philo->meals_eaten)
-			break ;
+		if (env->number_of_meals && env->number_of_meals == philo->meals_eaten)
+			env->number_of_philo_full++;
+		if (env->number_of_philo_full == env->number_of_philo)
+			env->dinner_is_over = 1;
 	}
 	return (ptr);
 }
@@ -86,17 +87,20 @@ void check_deaths(t_env *env)
 {
 	int i;
 	long time;
-	while (env->number_of_philo_alive == env->number_of_philo && !env->dinner_is_over)
+	while (!env->dinner_is_over)
 	{
 		i = 0;
 		time = get_microsec();
 		while ( i < env->number_of_philo)
 		{
-			if (time - env->philos[i].last_meal >= env->time_to_die * 1000)
-			{
-				philo_state(&env->philos[i], DEATH);
-				env->dinner_is_over = 1;
-			}
+			// if (env->number_of_meals && env->number_of_meals > env->philos[i].meals_eaten)
+			// {
+				if (time - env->philos[i].last_meal >= env->time_to_die * 1000)
+				{
+					philo_state(&env->philos[i], DEATH);
+					return ;
+				}
+			// }
 			i++;
 		}
 		usleep(500);

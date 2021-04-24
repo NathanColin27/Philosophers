@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 08:41:06 by nathan            #+#    #+#             */
-/*   Updated: 2021/04/23 15:06:44 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 14:29:53 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	free_all(t_env	*env)
 	int i;
 
 	i = 0;
+	sleep(1);
 	while (i < env->number_of_philo)
-		{
+	{
 		pthread_mutex_destroy(&env->forks[i].lock);
 		i++;
-		}
-		
+	}
 	ft_free_list();
 	return ;
 }
