@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 15:06:54 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 15:59:19 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_philo
 	int				id;
 	long			last_meal;
 	int				state;
-	int				alive;
 	int				meals_eaten;
 	struct s_env 	*env;
 	pthread_t		thread;
@@ -65,7 +64,6 @@ typedef struct s_philo
 typedef struct s_env
 {
 	int				number_of_philo;
-	int				number_of_philo_alive;
 	int				number_of_philo_full;
 	long			current_time;
 	int				time_to_die;

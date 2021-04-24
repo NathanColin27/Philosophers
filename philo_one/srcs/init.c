@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:04:29 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/23 15:22:59 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 15:59:59 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_env(t_env *env)
 	if (!env->forks)
 		error_exit("Forks's malloc failed");
 	pthread_mutex_init(&env->mutex, NULL);
-	env->number_of_philo_alive = env->number_of_philo;
 	env->number_of_philo_full = 0;
 	env->dinner_is_over = 0;
 }
@@ -50,7 +49,6 @@ void	init_philo(void)
 	i = 0;
 	while (i < env->number_of_philo)
 	{
-		env->philos[i].alive = 1;
 		env->philos[i].meals_eaten = 0;
 		env->philos[i].last_meal = get_microsec();
 		env->philos[i].id = i;

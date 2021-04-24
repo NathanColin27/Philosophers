@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:14:00 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/24 14:23:18 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/24 16:14:38 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ void philo_state(t_philo *philo, int state)
 {
 	t_env	*env;
 	long i;
+	int j;
 
+	j = 0;
 	i = get_microsec();
 	env = get_env();
-	if (env->dinner_is_over)
-		return ;
 	pthread_mutex_lock(&env->mutex);
+	if (env->dinner_is_over)
+	{
+		pthread_mutex_unlock(&env->mutex);
+		return ;
+	}
 	ft_putnbr_fd((i - env->dinner_start)/1000, 1);
 	write(1, " ", 1);
 	ft_putnbr_fd(philo->id + 1, 1);
@@ -54,11 +59,12 @@ void philo_state(t_philo *philo, int state)
 	if (state == DEATH)
 	{	
 		env->dinner_is_over = 1;
-
+		while (j++ < env->number_of_philo)
+			pthread_mutex_unlock(&env->forks[j].lock);
+		pthread_mutex_unlock(&env->mutex);
 		return ;
 	}
 	pthread_mutex_unlock(&env->mutex);
-	
 }
 
 void 	philo_grab_fork(t_philo *philo)
