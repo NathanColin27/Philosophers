@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:37:14 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/24 17:31:16 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/25 13:30:28 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include "pthread.h"
+# include <pthread.h>
+# include <semaphore.h>
 # include <unistd.h>
 
 # define EATING 1
@@ -33,6 +34,9 @@
 # define THINK_MSG_LEN 14
 # define DEATH_MSG_LEN 7
 # define GRAB_FORK_MSG_LEN 19
+# define WRITE_SEM "write"
+# define MEALS_SEM "meals"
+# define FORK_SEM "fork"
 
 struct	s_env;
 
@@ -42,22 +46,13 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-typedef struct s_fork
-{
-	int				last_philo;
-	pthread_mutex_t	lock;
-}				t_fork;
-
 typedef struct s_philo
 {
 	int				id;
 	long			last_meal;
-	int				state;
 	int				meals_eaten;
 	struct s_env	*env;
 	pthread_t		thread;
-	t_fork			*fork_left;
-	t_fork			*fork_right;
 }				t_philo;
 
 typedef struct s_env
@@ -71,9 +66,10 @@ typedef struct s_env
 	int				number_of_meals;
 	long			dinner_start;
 	int				dinner_is_over;
-	pthread_mutex_t	mutex;
+	sem_t			*write_sem;
+	sem_t			*forks_sem;
+	sem_t			*meals_sem;
 	t_philo			*philos;
-	t_fork			*forks;
 	t_list			*ptrs_to_free;
 }				t_env;
 
@@ -107,7 +103,7 @@ t_env			*get_env(void);
 
 void			init_env(t_env *env);
 
-void			init_philo(void);
+void			init_philo(t_env *env);
 
 void			init_forks(t_env *env);
 
