@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:36:11 by ncolin            #+#    #+#             */
-/*   Updated: 2021/04/25 13:33:30 by ncolin           ###   ########.fr       */
+/*   Updated: 2021/04/25 17:51:55 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ int	main(int ac, char **av)
 	ft_free_list();
 	sem_unlink(WRITE_SEM);
 	sem_unlink(FORK_SEM);
+	sem_unlink(MEALS_SEM);
 	return (0);
 }
